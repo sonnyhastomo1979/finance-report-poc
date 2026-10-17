@@ -28,8 +28,12 @@ business-request demonstration. All records are synthetic. Use Node.js 24+.
 
 ## Cursor Cloud specific instructions
 
-The install command is in `.cursor/environment.json`. The app does not need
-database credentials or external services. Run all checks at the repository root.
+The runtime image and install command are in `.cursor/environment.json` and
+`.cursor/Dockerfile`. Node.js 24 is installed globally; `.npmrc` rejects older
+versions. After changing environment configuration, build and activate a new
+Cursor build, then start a new agent. Existing agents keep their original machine.
+The app does not need database credentials or external services. Run all checks
+at the repository root.
 Work only on the assigned request and return a branch/pull request with the actual
 test results. CSV export is intentionally absent from the initial baseline; add it
 only when it is the approved task.

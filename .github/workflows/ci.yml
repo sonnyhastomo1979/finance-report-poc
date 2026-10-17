@@ -43,3 +43,9 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      - name: Build Cursor development image
+        run: docker build --tag finance-report-cursor:ci --file .cursor/Dockerfile .cursor
+      - name: Verify a fresh Cursor shell
+        run: |
+          docker run --rm --volume "$GITHUB_WORKSPACE:/source:ro" finance-report-cursor:ci \
+            bash -lc 'cp -R /source /tmp/finance-report && cd /tmp/finance-report && node --version && npm ci && npm test && npm run check && npm run build'

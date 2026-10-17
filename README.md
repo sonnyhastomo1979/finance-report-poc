@@ -53,9 +53,19 @@ validates JavaScript syntax; it is not a broader lint or type-analysis check.
 
 ## Cursor configuration
 
-Connect this GitHub repository to Cursor Cloud Agents. Its environment uses Node
-24 and `npm ci`; `.cursor/environment.json` supplies the install command. Use
-`npm test`, `npm run check`, and `npm run build` to verify the environment.
+Connect this GitHub repository to Cursor Cloud Agents. Select
+`.cursor/environment.json` as the environment configuration file. It references
+`.cursor/Dockerfile`, which installs Node.js 24 globally for both builds and fresh
+agent shells. The install command runs `npm ci` and all three verification commands.
+`.npmrc` makes an unsupported Node version fail installation rather than produce
+only an engine warning. `.nvmrc` alone does not install or activate Node in Cursor.
+
+After a configuration update, trigger a new build from the environment dashboard.
+Activate the successful build if it is marked Draft. Start a **new** verification
+agent from that active build; an existing agent keeps its previous machine and
+Node version. Verify `node --version` reports `v24.x`, then run `npm test`,
+`npm run check`, and `npm run build`. GitHub's Build check also builds the image
+and runs these commands in a fresh, non-root login shell.
 
 Once the repository is pushed and CI is green, create a company-controlled Cursor
 API key and obtain an available model ID from `GET https://api.cursor.com/v1/models`.

@@ -1,3 +1,6 @@
 {
-  "install": "npm ci"
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "install": "node --version && npm ci && npm test && npm run check && npm run build"
 }
