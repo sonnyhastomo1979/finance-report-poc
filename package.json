@@ -1,0 +1,18 @@
+{
+  "name": "finance-report-poc",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A small finance reporting app for the Forge O/S and Cursor demonstration.",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "node --watch server.mjs",
+    "test": "node --test",
+    "check": "node scripts/check.mjs",
+    "build": "node scripts/build.mjs",
+    "preview": "node server.mjs --dist"
+  }
+}

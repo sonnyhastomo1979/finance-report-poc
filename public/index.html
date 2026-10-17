@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7f8f6" />
+    <title>Monthly expenses · Finance Report</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="/styles.css" />
+    <script type="module" src="/app.mjs"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#report">Skip to report</a>
+    <aside class="sidebar" aria-label="Workspace">
+      <a class="brand" href="/" aria-label="Ledger home">
+        <span class="brand-mark" aria-hidden="true">L</span
+        ><span>ledger<span class="brand-dot">.</span></span>
+      </a>
+      <div class="workspace-label">FINANCE WORKSPACE</div>
+      <div class="active-nav" aria-current="page">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.7"
+          aria-hidden="true"
+        >
+          <path d="M5 20V10m7 10V4m7 16v-7" stroke-linecap="round" />
+        </svg>
+        Expense reports
+      </div>
+      <div class="sidebar-footer">
+        <span class="avatar">FM</span>
+        <div><strong>Finance Manager</strong><span>Demo workspace</span></div>
+      </div>
+    </aside>
+    <div class="page">
+      <header class="topbar">
+        <span
+          >Workspace <span class="breadcrumb-separator">/</span>
+          <strong>Reporting</strong></span
+        ><span class="demo-pill"><span></span>Synthetic data</span>
+      </header>
+      <main id="report">
+        <div class="page-heading">
+          <div>
+            <p class="eyebrow">EXPENSE REPORTING</p>
+            <h1>Monthly expenses<span>.</span></h1>
+            <p class="description">A clear view of where your money goes.</p>
+          </div>
+          <div class="period-picker">
+            <label for="month">Reporting period</label
+            ><select id="month" name="month">
+              <option value="2026-09">September 2026</option>
+              <option value="2026-08">August 2026</option>
+              <option value="2026-10">October 2026</option>
+            </select>
+          </div>
+        </div>
+        <section class="metrics" aria-label="Report summary" aria-live="polite">
+          <article class="metric primary-metric">
+            <div class="metric-label">
+              Total expenses<span class="currency">IDR</span>
+            </div>
+            <strong id="total" class="metric-value">—</strong>
+            <p id="comparison">Loading report…</p>
+            <div class="metric-decoration" aria-hidden="true"></div>
+          </article>
+          <article class="metric">
+            <div class="metric-label">
+              Transactions<span class="metric-icon" aria-hidden="true">↗</span>
+            </div>
+            <strong id="count" class="metric-value">—</strong>
+            <p>Recorded in the selected month</p>
+          </article>
+          <article class="metric">
+            <div class="metric-label">
+              Departments<span class="metric-icon" aria-hidden="true">◫</span>
+            </div>
+            <strong id="department-count" class="metric-value">—</strong>
+            <p>Contributing to this report</p>
+          </article>
+        </section>
+        <div class="report-layout">
+          <section
+            class="panel transactions"
+            aria-labelledby="transactions-title"
+          >
+            <header class="panel-heading">
+              <div>
+                <h2 id="transactions-title">Expense details</h2>
+                <p>
+                  All transactions for
+                  <span id="selected-period">September 2026</span>
+                </p>
+              </div>
+              <span id="row-count" class="count-badge">0 records</span>
+            </header>
+            <div class="table-scroll">
+              <table>
+                <caption class="sr-only">
+                  Expenses in the selected reporting period
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Expense</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Department</th>
+                    <th scope="col" class="numeric">Amount</th>
+                  </tr>
+                </thead>
+                <tbody id="expense-rows"></tbody>
+                <tfoot>
+                  <tr>
+                    <th scope="row" colspan="3">Period total</th>
+                    <td id="table-total" class="numeric">—</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+            <div id="empty" class="empty-state" hidden>
+              <strong>No expenses this month</strong>
+              <p>Choose another reporting period to view recorded expenses.</p>
+            </div>
+            <footer class="table-footer">
+              <span class="status-dot"></span>Amounts shown in Indonesian rupiah
+              · IDR
+            </footer>
+          </section>
+          <aside class="report-aside" aria-label="Report context">
+            <section class="panel distribution">
+              <header class="panel-heading">
+                <div>
+                  <h2>By department</h2>
+                  <p>Share of monthly expenses</p>
+                </div>
+              </header>
+              <div id="department-bars" class="department-bars"></div>
+            </section>
+            <section class="context-note">
+              <div class="note-icon" aria-hidden="true">i</div>
+              <h2>A simple, reliable baseline.</h2>
+              <p>
+                This report uses sample records so your team can explore the
+                workflow with a result everyone can verify.
+              </p>
+              <span>4 sample records · 2 reporting months</span>
+            </section>
+          </aside>
+        </div>
+        <footer class="page-footer">
+          <span>Finance Report POC</span
+          ><span>Prepared for the Forge O/S showcase</span>
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>
