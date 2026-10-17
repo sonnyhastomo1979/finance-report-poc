@@ -79,8 +79,12 @@ are separate connections; both need access to this repository.
 
 1. Make sure the Forge API, Web, and Worker are on the external-agents release and
    the external-agent migration has been applied.
-2. Use a Development workspace and a healthy Development GitHub connection in
-   Integrations. It must be able to read the repository, commits, PRs, and CI checks.
+2. Select the demo workspace and connect GitHub in Integrations. The current
+   self-service GitHub OAuth flow saves the credential with a **Production**
+   environment label. The external Cursor connection must use that same label;
+   selecting Development will hide a Production credential. Use the dedicated
+   `finance-report-poc` repository for the pilot. The credential must be able to
+   read its commits, PRs, and CI checks. The environment label does not deploy code.
 3. Prepare a Finance requester with `pipelines.run`, a connection administrator
    with `pipelines.run` and `agents.manage`, and an independent Engineering reviewer
    with approval authority. The current launch/review requests require an Admin or
@@ -88,16 +92,16 @@ are separate connections; both need access to this repository.
    Engineering reviewer.
 4. Go to Settings → Code Delivery → External coding agents → Connect an agent:
 
-   | Field                 | Value                                  |
-   | --------------------- | -------------------------------------- |
-   | Provider              | `cursor`                               |
-   | Connection name       | `Cursor — Finance POC`                 |
-   | Provider API key      | The prepared Cursor API key            |
-   | Environment           | `DEVELOPMENT`                          |
-   | GitHub connection     | The Development connection from step 2 |
-   | Approved repositories | `sonnyhastomo1979/finance-report-poc`  |
-   | Provider model ID     | An exact ID available to the key       |
-   | Enabled               | Checked for the pilot                  |
+   | Field                 | Value                                      |
+   | --------------------- | ------------------------------------------ |
+   | Provider              | `cursor`                                   |
+   | Connection name       | `Cursor — Finance POC`                     |
+   | Provider API key      | The prepared Cursor API key                |
+   | Environment           | `PRODUCTION` (match the GitHub credential) |
+   | GitHub connection     | The healthy connection from step 2         |
+   | Approved repositories | `sonnyhastomo1979/finance-report-poc`      |
+   | Provider model ID     | An exact ID available to the key           |
+   | Enabled               | Checked for the pilot                      |
 
 5. Save, then verify the connection. If its scope, enabled state, key, or model
    changes, save and verify it again before creating a job.
