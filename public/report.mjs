@@ -69,3 +69,36 @@ export function monthLabel(month) {
     timeZone: "UTC",
   }).format(new Date(`${month}-01T12:00:00Z`));
 }
+
+// Spreadsheet apps treat a leading =, +, -, @, tab, or carriage return as a formula.
+const SPREADSHEET_FORMULA = /^[=+\-@\t\r]/;
+const SPREADSHEET_FORMULA_AFTER_WHITESPACE = /^[ \t\r\n]+[=+\-@]/;
+
+function csvField(value) {
+  let text = String(value);
+  if (
+    SPREADSHEET_FORMULA.test(text) ||
+    SPREADSHEET_FORMULA_AFTER_WHITESPACE.test(text)
+  ) {
+    text = `'${text}`;
+  }
+  if (/[",\r\n\t]/.test(text)) return `"${text.replaceAll('"', '""')}"`;
+  return text;
+}
+
+export function expenseCsvFilename(month) {
+  return `monthly-expenses-${validateMonth(month)}.csv`;
+}
+
+export function expenseCsv(records, month) {
+  const report = monthlyReport(records, month);
+  const lines = ["Date,Department,Amount,Currency"];
+  for (const row of report.rows) {
+    lines.push(
+      [row.date, row.department, row.amount, report.currency]
+        .map(csvField)
+        .join(","),
+    );
+  }
+  return `\uFEFF${lines.join("\r\n")}\r\n`;
+}
