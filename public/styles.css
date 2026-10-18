@@ -31,6 +31,7 @@ select {
   font: inherit;
 }
 a:focus-visible,
+button:focus-visible,
 select:focus-visible {
   outline: 3px solid #45a888;
   outline-offset: 4px;
@@ -205,6 +206,7 @@ main {
   gap: 24px;
   align-items: center;
   margin-bottom: 33px;
+  flex-wrap: wrap;
 }
 .eyebrow {
   font-size: 10px;
@@ -227,11 +229,46 @@ h1 > span {
   color: var(--muted);
   margin-top: 13px;
 }
+.period-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  flex-shrink: 0;
+  width: 185px;
+}
 .period-picker {
   display: flex;
   flex-direction: column;
   gap: 8px;
   min-width: 185px;
+}
+.period-actions .period-picker {
+  min-width: 0;
+  width: 100%;
+}
+.download-csv {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid #125a42;
+  border-radius: 8px;
+  background: var(--green);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.download-csv:hover {
+  background: #125a42;
+}
+.download-csv:active {
+  background: #0e4634;
 }
 .period-picker label {
   font-size: 10px;
@@ -640,6 +677,9 @@ tfoot td {
   .period-picker {
     min-width: 170px;
   }
+  .period-actions {
+    width: 170px;
+  }
 }
 @media (max-width: 560px) {
   .topbar {
@@ -666,8 +706,11 @@ tfoot td {
   .description {
     font-size: 12px;
   }
-  .period-picker {
+  .period-actions {
+    width: 100%;
     margin-top: 23px;
+  }
+  .period-picker {
     max-width: none;
   }
   .period-picker label {

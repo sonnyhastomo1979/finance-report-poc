@@ -48,13 +48,18 @@
             <h1>Monthly expenses<span>.</span></h1>
             <p class="description">A clear view of where your money goes.</p>
           </div>
-          <div class="period-picker">
-            <label for="month">Reporting period</label
-            ><select id="month" name="month">
-              <option value="2026-09">September 2026</option>
-              <option value="2026-08">August 2026</option>
-              <option value="2026-10">October 2026</option>
-            </select>
+          <div class="period-actions">
+            <div class="period-picker">
+              <label for="month">Reporting period</label
+              ><select id="month" name="month">
+                <option value="2026-09">September 2026</option>
+                <option value="2026-08">August 2026</option>
+                <option value="2026-10">October 2026</option>
+              </select>
+            </div>
+            <button type="button" id="download-csv" class="download-csv">
+              Download CSV
+            </button>
           </div>
         </div>
         <section class="metrics" aria-label="Report summary" aria-live="polite">

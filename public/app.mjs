@@ -1,5 +1,7 @@
 import { expenses } from "./expenses.mjs";
 import {
+  expenseCsv,
+  expenseCsvFilename,
   formatAmount,
   monthLabel,
   monthlyReport,
@@ -24,6 +26,10 @@ function render() {
   byId("comparison").textContent =
     `${formatAmount(report.previousTotal)} in ${monthLabel(previousMonth(report.month))}`;
   byId("selected-period").textContent = monthLabel(report.month);
+  byId("download-csv").setAttribute(
+    "aria-label",
+    `Download CSV for ${monthLabel(report.month)}`,
+  );
   byId("row-count").textContent =
     `${report.rows.length} ${report.rows.length === 1 ? "record" : "records"}`;
   byId("empty").hidden = report.rows.length > 0;
@@ -86,5 +92,21 @@ function render() {
   byId("department-bars").replaceChildren(...bars);
 }
 
+function downloadCsv() {
+  const month = byId("month").value;
+  const blob = new Blob([expenseCsv(expenses, month)], {
+    type: "text/csv;charset=utf-8",
+  });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = expenseCsvFilename(month);
+  document.body.append(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
 byId("month").addEventListener("change", render);
+byId("download-csv").addEventListener("click", downloadCsv);
 render();
